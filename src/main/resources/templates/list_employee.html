@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Employés</title>
+</head>
+<body>
+<h1>Liste des Employés</h1>
+<a href="/employees/add">Ajouter un Employé</a>
+<table>
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Compétences</th>
+        <th>Projet</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Ici, vous pouvez utiliser Thymeleaf pour boucler sur la liste des employés et afficher chaque employé dans une ligne de tableau -->
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.name}">Nom</td>
+        <td th:text="${employee.email}">Email</td>
+        <td th:text="${employee.skills}">Compétences</td>
+        <td th:text="${employee.project.name}">Projet</td>
+        <td>
+            <form th:action="@{/employees/remove}" method="post">
+                <input type="hidden" th:name="employeeId" th:value="${employee.id}">
+                <button type="submit">Remove</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
